@@ -59,18 +59,18 @@ exports.updateQuiz = async (req, res) => {
 
 // Delete a quiz
 exports.deleteQuiz = async (req, res) => {
-  try {
-    const quiz = await Quiz.findById(req.params.id);
-    if (!quiz) {
-      return res.status(404).json({ message: 'Quiz not found' });
+    try {
+      const quiz = await Quiz.findById(req.params.id);
+      if (!quiz) {
+        return res.status(404).json({ message: 'Quiz not found' });
+      }
+      await quiz.remove();
+      res.json({ message: 'Quiz removed' });
+    } catch (error) {
+      res.status(400).json({ message: 'Error deleting quiz' });
     }
-    await quiz.remove();
-    res.json({ message: 'Quiz removed' });
-  } catch (error) {
-    res.status(400).json({ message: 'Error deleting quiz' });
-  }
-};
-
+  };
+  
 // Delete a question from a quiz
 exports.deleteQuestionFromQuiz = async (req, res) => {
   try {
