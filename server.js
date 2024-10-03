@@ -1,29 +1,27 @@
-const PORT = 3500;
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
-const connectDB = require("./config/dbconfig");
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const dotenv = require('dotenv');
+
+// Initialize express and configure dotenv
+dotenv.config();
 const app = express();
-const verifyUser = require('./middleware/verifyUser')
-
-const authRouter = require('./routes/auth.router');
-const quizRouter = require('./routes/quiz.router');
-
-
-app.use(cors());
 app.use(express.json());
-connectDB();
+app.use(cors());
 
-app.get("/", (req, res) => {
-  res.send("hello XD");
-});
+// Connect to MongoDB
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => console.log('MongoDB connected'))
+.catch((err) => console.error('MongoDB connection error:', err));
 
-app.use("/api/auth",authRouter);
-app.use("/api/quiz",quizRouter);
+// Routes
+app.use('/api/auth', require('./routes/authRoutes'));
+app.use('/api/quiz', require('./routes/quizRoutes'));
 
-mongoose.connection.once("open", () => {
-  console.log("Conneted to the database");
-  app.listen(process.env.PORT || PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-  });
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
