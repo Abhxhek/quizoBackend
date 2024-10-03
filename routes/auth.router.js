@@ -6,6 +6,6 @@ const loginHandler = require("../controller/loginController");
 const signupHandler = require("../controller/signupController");
 
 router.route("/register").post(signupHandler);
-router.route("/login").post(loginHandler);
+router.route("/login").post(verifyUser, loginHandler);
 
 module.exports = router;
