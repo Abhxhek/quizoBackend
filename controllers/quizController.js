@@ -1,7 +1,7 @@
-const Quiz = require('../models/Quiz');
+import Quiz from "../models/Quiz.js"
 
 // Get all quizzes
-exports.getQuizzes = async (req, res) => {
+export const getQuizzes = async (req, res) => {
   try {
     const quizzes = await Quiz.find();
     res.json(quizzes);
@@ -11,7 +11,7 @@ exports.getQuizzes = async (req, res) => {
 };
 
 // Create a new quiz
-exports.createQuiz = async (req, res) => {
+export const createQuiz = async (req, res) => {
   const { title, description, questions } = req.body;
 
   if (questions.length < 5) {
@@ -33,7 +33,7 @@ exports.createQuiz = async (req, res) => {
 };
 
 // Update an existing quiz
-exports.updateQuiz = async (req, res) => {
+export const updateQuiz = async (req, res) => {
   const { title, description, questions } = req.body;
 
   if (questions.length < 5) {
@@ -58,7 +58,7 @@ exports.updateQuiz = async (req, res) => {
 };
 
 // Delete a quiz
-exports.deleteQuiz = async (req, res) => {
+export const deleteQuiz = async (req, res) => {
     try {
       const quiz = await Quiz.findById(req.params.id);
       if (!quiz) {
@@ -72,7 +72,7 @@ exports.deleteQuiz = async (req, res) => {
   };
   
 // Delete a question from a quiz
-exports.deleteQuestionFromQuiz = async (req, res) => {
+export const deleteQuestionFromQuiz = async (req, res) => {
   try {
     const quiz = await Quiz.findById(req.params.quizId);
     if (!quiz) {

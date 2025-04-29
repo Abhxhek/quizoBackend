@@ -2,6 +2,7 @@
   "name": "qiuzo-backend",
   "version": "1.0.0",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js"
@@ -21,6 +22,7 @@
     "mongoose": "^8.7.0"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
     "nodemon": "^3.1.7"
   }
 }

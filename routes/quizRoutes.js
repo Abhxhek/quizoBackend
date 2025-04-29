@@ -1,12 +1,8 @@
-const express = require("express");
-const {
-  getQuizzes,
-  createQuiz,
-  updateQuiz,
-  deleteQuiz,
-  deleteQuestionFromQuiz,
-} = require("../controllers/quizController");
-const { protect } = require("../middleware/authMiddleware");
+
+import express from "express"
+import { getQuizzes, createQuiz, deleteQuiz, updateQuiz, deleteQuestionFromQuiz } from "../controllers/quizController.js"
+import { protect } from "../middleware/authMiddelware.js";
+
 const router = express.Router();
 
 router.get("/", getQuizzes);
@@ -15,4 +11,4 @@ router.put("/:id", protect, updateQuiz); // Update quiz
 router.delete("/:id", protect, deleteQuiz); // Ensure this route is correctly set up
 router.delete("/:quizId/question/:questionId", protect, deleteQuestionFromQuiz); // Delete a question from a quiz
 
-module.exports = router;
+export default router;
