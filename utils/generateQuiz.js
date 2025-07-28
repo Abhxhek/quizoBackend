@@ -71,5 +71,5 @@ async function generateMCQsFromTopic(topic) {
     }
 }
 
-// Example usage
-generateMCQsFromTopic("Java");
+// // Example usage
+// generateMCQsFromTopic("Java");
