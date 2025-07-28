@@ -23,10 +23,10 @@ async function generateMCQsFromTopic(topic) {
         **Topic:** "${topic}"
 
         **Strict Instructions:**
-        1.  **Topic Relevance:** Every question must be strictly and directly relevant to the provided topic.
+        1.  **Topic Relevance:** Every question must be directly relevant to the provided topic.
         2.  **Total Questions:** Generate exactly 10 MCQs.
         3.  **Difficulty Mix:** The distribution must be: 4 basic, 3 intermediate, and 3 advanced.
-        4.  **Option Conciseness:** Each answer option (A, B, C, D) must be very concise, ideally 4 words or fewer.
+        4.  **Option Conciseness:** Each answer option (A, B, C, D) must be very concise.
         5.  **Output Format:** Your entire response MUST be a single, valid JSON array. Do not include any markdown (like \`\`\`json), introductory text, or explanations.
 
         Example of the expected outcome
@@ -72,4 +72,4 @@ async function generateMCQsFromTopic(topic) {
 }
 
 // Example usage
-generateMCQsFromTopic("Basics of Machine Learning");
+generateMCQsFromTopic("Java");
