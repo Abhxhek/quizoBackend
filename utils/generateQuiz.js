@@ -70,6 +70,3 @@ async function generateMCQsFromTopic(topic) {
         console.error("❌ Error:", err?.response?.data || err.message);
     }
 }
-
-// // Example usage
-// generateMCQsFromTopic("Java");
