@@ -16,7 +16,7 @@ const client = new OpenAI({
 });
 
 
-async function generateMCQsFromTopic(topic) {
+export default async function generateMCQsFromTopic(topic) {
     const prompt = `
         You are a JSON generation API. Your sole function is to create a JSON array of multiple-choice questions (MCQs).
 
@@ -70,3 +70,4 @@ async function generateMCQsFromTopic(topic) {
         console.error("❌ Error:", err?.response?.data || err.message);
     }
 }
+
