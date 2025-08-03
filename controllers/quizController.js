@@ -10,6 +10,39 @@ import generateMCQsFromTopic from "../utils/generateQuiz.js"
 //     res.status(400).json({ message: 'Error fetching quizzes' });
 //   }
 // };
+export const getQuizById = async (req, res) => {
+    try {
+        // 1. Get the quiz ID from the URL parameters
+        const { id } = req.params;
+        const userId = req.user.id; // From your auth middleware
+
+        if(!id){
+          res.status(404).json({ message: 'Please provide the valid id' });
+        }
+
+        // 2. Find the quiz by its ID AND ensure it was created by the logged-in user
+        const quiz = await Quiz.findOne({
+            _id: id,
+            createdBy: userId
+        });
+
+        // 3. If no quiz is found, it's either non-existent or not owned by the user.
+        // In either case, return a 404 to avoid leaking information.
+        if (!quiz) {
+            return res.status(404).json({ message: 'Quiz not found.' });
+        }
+
+        // 4. If the quiz is found and owned by the user, send it back.
+        res.status(200).json({
+            message: 'Quiz fetched successfully',
+            data: quiz,
+        });
+
+    } catch (error) {
+        console.error('Error fetching quiz by ID:', error);
+        res.status(500).json({ message: 'Server error while fetching the quiz.' });
+    }
+};
 
 export const getQuizzes = async (req, res) => {
     try {
@@ -79,6 +112,8 @@ export const getQuizzes = async (req, res) => {
 //     res.status(400).json({ message: 'Error creating quiz' });
 //   }
 // };
+
+
 
 export const createQuiz = async (req, res) => {
   try {
